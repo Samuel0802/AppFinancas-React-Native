@@ -20,6 +20,8 @@
  
 - https://insomnia.rest - teste de API
 
+- Rodar api: yarn dev ou npm run dev
+
 - SqlLite - banco utilizado
 
 
