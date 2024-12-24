@@ -12,6 +12,16 @@
 
 - npm install styled-components --force
 
+### Backend finanças App
+
+- https://github.com/devfraga/backend-financas - configuração da API DO BANCO
+
+- https://github.com/beekeeper-studio/beekeeper-studio/releases/tag/v3.7.10 - connectar com banco
+ 
+- https://insomnia.rest - teste de API
+
+- SqlLite - banco utilizado
+
 
 ### Template no Figma 
 

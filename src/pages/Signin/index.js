@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import {
    Backgroud ,
     Container,
@@ -13,11 +12,12 @@ import {
         } from "./styles";
   import { Platform } from "react-native";  //Pra saber qual plataforma    
   import { useNavigation } from "@react-navigation/native";
-
+ 
 export default function SignIn(){
 
+
   const navigation = useNavigation();
-  
+
   return(
     <Backgroud>
        <Container
@@ -25,9 +25,9 @@ export default function SignIn(){
        enabled
        >
             
-            {/* <Logo
-            source={require('../../assets/logo.png')}
-            /> */}
+            <Logo
+            source={require('../../assets/Logo.png')}
+            />
 
             <AreaInput>
             <Input
@@ -38,7 +38,7 @@ export default function SignIn(){
 
             <AreaInput>
             <Input
-            placeholder="Sua senha"
+            placeholder="Digite sua Senha"
             />
             </AreaInput>
 
