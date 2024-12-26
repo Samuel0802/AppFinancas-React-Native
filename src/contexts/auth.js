@@ -36,12 +36,52 @@ async function SignUp(email, password, nome) {
     }
 }
 
+//função de login
+async function SignIn(email, password) {
+   
+    setLoadingAuth(true);
+    try{
+        const response = await api.post('/login', {
+            //manda para banco: email e senha
+            email: email,
+            password: password
+        })
+
+        const {id, name, token} = response.data; //desconstruir objeto 
+
+        const data = {
+            id,
+            name,
+            token,
+            email,
+        };
+
+        api.defaults.headers.Authorization = `Bearer ${token}`;//na proxima requisição enviar Bearer ${token} - enviar o Token junto
+
+        setUser({
+            id,
+            name,
+            email,
+        });
+        
+        setLoadingAuth(false);
+
+
+
+    }catch(err){
+
+        console.log("ERRO AO LOGAR", err);
+        setLoadingAuth(false);
+    }
+
+}
+
 
     return (
 
         //value={{ user, SignUp }}: qualquer componente consiga acessar essa função
        //Compartilhando Tudo no App
-        <AuthContext.Provider value={{ signed: !!user, user, SignUp, loadingAuth }}>
+        <AuthContext.Provider value={{ signed: !!user, user, SignUp, SignIn, loadingAuth }}>
             {/* signed: !!user: converte variavel em boleano - ele verifica automatico se tem ou não um user logado   */}
             {children}
         </AuthContext.Provider>
