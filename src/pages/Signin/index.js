@@ -15,7 +15,6 @@ import {
  
 export default function SignIn(){
 
-
   const navigation = useNavigation();
 
   return(

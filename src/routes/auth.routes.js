@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";  //
 import SignIn from "../pages/Signin";
 import SignUp from "../pages/SignUp";
 
+//StackNavigator do login e cadastro
 
 const AuthStack = createNativeStackNavigator();
 

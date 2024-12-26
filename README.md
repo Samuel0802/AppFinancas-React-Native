@@ -8,6 +8,12 @@
 
 - npm install @react-navigation/native-stack
 
+- npm install @react-navigation/drawer --legacy-peer-deps
+
+- npm install react-native-gesture-handler react-native-reanimated --force
+
+
+
 ### Styled Components
 
 - npm install styled-components --force

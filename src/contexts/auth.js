@@ -7,26 +7,32 @@ export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
     // useState dentro do componente funcional
-    const [user, setUser] = useState({
-        nome: 'Samuel Souza'
-    });
+    const [user, setUser] = useState(null);
+    const [loadingAuth, setLoadingAuth] = useState(false);
 
 const navigation = useNavigation();
 
-//requisição HTTP com API
-async function SignUp(email, senha, nome) {
-    
+//requisição HTTP com API 
+//Função para Cadastrar Usuários
+async function SignUp(email, password, nome) {
+
+    setLoadingAuth(true); //Se chamou o SignUp - carregar
     try {
       const response = await api.post('/users', {
         name: nome,
+        password: password,
         email: email,
-        password: senha,
+       
       })
+      setLoadingAuth(false); //deu tudo certo cancelar o loading
 
-  navigation.goBack(); //Voltar uma pagina
+  navigation.goBack(); //Volta para a tela anterior
 
-    }catch(err){
+    }
+    
+    catch(err){
         console.log("ERRO AO CADATRAR", err);
+        setLoadingAuth(false);
     }
 }
 
@@ -34,8 +40,9 @@ async function SignUp(email, senha, nome) {
     return (
 
         //value={{ user, SignUp }}: qualquer componente consiga acessar essa função
-
-        <AuthContext.Provider value={{ user, SignUp }}>
+       //Compartilhando Tudo no App
+        <AuthContext.Provider value={{ signed: !!user, user, SignUp, loadingAuth }}>
+            {/* signed: !!user: converte variavel em boleano - ele verifica automatico se tem ou não um user logado   */}
             {children}
         </AuthContext.Provider>
     );

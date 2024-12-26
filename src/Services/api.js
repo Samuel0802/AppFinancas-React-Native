@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//consulta de api 
+
 const api = axios.create({
 //   baseURL: "http://localhost:3333/users"
 

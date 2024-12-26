@@ -1,5 +1,5 @@
 import React , {useContext, useState} from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import {
   Backgroud,
   Container,
@@ -10,23 +10,30 @@ import {
   SubmitText,
 
 } from '../Signin/styles';
-import { Platform } from "react-native";
+import { Platform, ActivityIndicator } from "react-native";
 import { AuthContext } from "../../contexts/auth";
 
 
 export default function SignUp() {
 
-  //SignUp: nome da função do meu context
-  const { SignUp } = useContext(AuthContext);
+  
+  const { SignUp, loadingAuth } = useContext(AuthContext); //é um gancho (hook) do React. Ele serve para acessar informações de um contexto.
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
  
   //Pegando as informação digitada pelo user e jogar na contexts/auth.js
   function handleSignUp(){
-    SignUp(nome,email,senha);
+     //validação de campo
+     if(nome === '' || email === '' || password === ''){
+      Alert.alert('Preencha todos os campos');
+      return;
+     }
+    //Função para Cadastrar Usuários
+    SignUp(email,password,nome);
   }
+  
 
   return (
     <Backgroud>
@@ -57,14 +64,23 @@ export default function SignUp() {
         <AreaInput>
           <Input
             placeholder="Sua Senha"
-            value={senha} 
-            onChangeText={(text) => setSenha(text)}
+            value={password} 
+            onChangeText={(text) => setPassword(text)}
             secureTextEntry={true} //Esconder a senha
           />
         </AreaInput>
 
         <SubmitButton onPress={handleSignUp}>
-          <SubmitText>Cadastrar</SubmitText>
+
+          {
+            loadingAuth ? (
+            <ActivityIndicator size={20} color="#fff" />
+            ) : 
+            (
+              <SubmitText>Cadastrar</SubmitText>
+            )
+          }
+      
         </SubmitButton>
 
 
